@@ -1,0 +1,25 @@
+[{
+	"stateId": 1,
+	"name": "Новые",
+	"inbox": 5
+}, {
+	"stateId": 2,
+	"name": "В работе",
+	"inbox": 7
+}, {
+	"stateId": 3,
+	"name": "На рассмотрении",
+	"inbox": 3
+}, {
+	"stateId": 4,
+	"name": "Выполнены",
+	"inbox": 3
+}, {
+	"stateId": 5,
+	"name": "Отменены",
+	"inbox": 9
+}, {
+	"stateId": 6,
+	"name": "Черновики",
+	"inbox": 400
+}]

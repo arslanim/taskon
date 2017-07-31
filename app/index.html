@@ -86,20 +86,7 @@
 			</div>
 			<hr>
 		</nav>
-		<nav class="navbar task-status-navbar">
-			<div class="container-fluid">
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
-					<ul class="nav navbar-nav">
-						<li ng-repeat="inboxItem in $ctrl.inbox" ng-click="$ctrl.activateTab($event, inboxItem.stateId)" ng-class="{active: $route.current.activetab == 'active-item'}">
-							<a href="#!task-status/{{inboxItem.stateId}}">{{inboxItem.name}}
-							<span class="badge total-badget new">{{inboxItem.inbox}}</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<hr>
-		</nav>
+		<status-tab></status-tab>
 	</div>
   <script src="js/bundle.js"></script>
 </body>
