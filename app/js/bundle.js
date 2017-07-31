@@ -10360,7 +10360,7 @@ module.exports = function(app) {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(18);
+__webpack_require__(19);
 
 angular.module('services.module', [
 	'ngResource'
@@ -10368,12 +10368,13 @@ angular.module('services.module', [
 
 __webpack_require__(16)(angular.module('services.module'));
 __webpack_require__(15)(angular.module('services.module'));
+__webpack_require__(17)(angular.module('services.module'));
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(19);
+__webpack_require__(20);
 module.exports = 'ngRoute';
 
 
@@ -10381,7 +10382,7 @@ module.exports = 'ngRoute';
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(20);
+__webpack_require__(21);
 module.exports = angular;
 
 
@@ -12845,7 +12846,7 @@ __webpack_require__(3);
 module.exports = function(componentsModule) {
 	angular.module('components.module')
 		.component('statusTab', {
-			template: __webpack_require__(21),
+			template: __webpack_require__(22),
 			controller: ['AuthService', 'StateInbox', '$route', function(AuthService, StateInbox, $route) {
 				var controller = this;
 
@@ -12880,8 +12881,8 @@ module.exports = function(serviceModule) {
 /* 16 */
 /***/ (function(module, exports) {
 
-module.exports = function(serviceModule) {
-	serviceModule
+module.exports = function(servicesModule) {
+	servicesModule
 		.factory('StateInbox', ['$resource', function($resource) {
 			return $resource('/services/resources/state-inbox/:userId.json', {}, {
 				getUserStateInbox: {
@@ -12898,6 +12899,26 @@ module.exports = function(serviceModule) {
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports) {
+
+module.exports = function(servicesModule) {
+	servicesModule
+		.factory('Task', ['$resource', function($resource) {
+			return $resource('/services/resources/task/:userId/:stateId/tasks.json', {}, {
+				getUserTasksByState: {
+					method: 'GET',
+					params: {
+						userId: '@userId',
+						stateId: '@stateId'
+					},
+					isArray: true
+				}
+			});
+		}]);
+};
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports) {
 
 /**
@@ -13761,15 +13782,15 @@ angular.module('ngResource', ['ng']).
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(17);
+__webpack_require__(18);
 module.exports = 'ngResource';
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 /**
@@ -14846,7 +14867,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 /**
@@ -48682,7 +48703,7 @@ $provide.value("$locale", {
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = "<nav class=\"navbar task-status-navbar\">\r\n\t<div class=\"container-fluid\">\r\n\t\t<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-9\">\r\n\t\t\t<ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li ng-repeat=\"inboxItem in $ctrl.inbox\" ng-click=\"$ctrl.activateTab($event, inboxItem.stateId)\" ng-class=\"{active: $route.current.activetab == 'active-item'}\">\r\n\t\t\t\t\t<a href=\"#!task-status/{{inboxItem.stateId}}\">{{inboxItem.name}}\r\n\t\t\t\t\t<span class=\"badge total-badget new\">{{inboxItem.inbox}}</span>\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n\t<hr>\r\n</nav>"
