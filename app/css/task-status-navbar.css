@@ -1,0 +1,20 @@
+.task-status-navbar .navbar-nav > li > a {
+	padding-left: 0;
+	padding-right: 0;
+}
+.task-status-navbar .nav > li {
+	margin: 0 30px 0 0;
+}
+.task-status-navbar .nav > li > a:hover, .task-status-navbar .nav > li > a:focus, .task-status-navbar .active-item a {
+	border-bottom: 1px solid #ff6633;
+    background-color: transparent;
+    color: #222222!important;
+}
+.task-status-navbar .nav a{
+	color: #cccccc
+}
+.task-status-navbar hr{
+	border: 0;
+    border-top: 1px solid #cccccc;
+    margin: -1px 0 0 0;
+}

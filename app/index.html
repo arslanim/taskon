@@ -2,8 +2,105 @@
 <html ng-app="app">
 <head lang="en">
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bundle.css" />
   <title>Taskon</title>
 </head>
 <body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">taskon</a> 
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Задания</a></li>
+						<li><a href="#">Финансы</a></li>
+						<li><a href="#">Компания</a></li>
+						<li><a href="#">Статистика</a></li>
+					</ul>
+					<p class="navbar-text navbar-right">
+						<a href="#" class="help"></a>
+					</p>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown active">
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Никита Ласточкин
+				          <span class="caret"></span>
+				          </a>
+				          <ul class="dropdown-menu">
+				            <li><a href="#">Action</a></li>
+				            <li><a href="#">Another action</a></li>
+				            <li><a href="#">Something else here</a></li>
+				            <li role="separator" class="divider"></li>
+				            <li><a href="#">Separated link</a></li>
+				            <li role="separator" class="divider"></li>
+				            <li><a href="#">One more separated link</a></li>
+				          </ul>
+		        		</li>
+	        		</ul>
+					<p class="navbar-text navbar-right">
+						<a href="#" class="notification"></a>
+					</p>
+					<p class="navbar-text navbar-right">
+						<span class="balance-title">Баланс</span>
+						<span class="balance-sum">
+							<span>218 982, 90</span> <span class="glyphicon glyphicon-ruble" aria-hidden="true"></span>
+						</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 style="margin: 20px 0 20px 30px;">Задания</h1>
+			</div>
+		</div>
+		<nav class="navbar task-status-navbar" style="display: none">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+					<ul class="nav navbar-nav">
+						<li class="active-item"><a href="#">Новые <span class="badge total-badget">4354</span></a></li>
+						<li><a href="#">В работе <span class="badge total-badget new">4</span></a></li>
+						<li><a href="#">На рассмотрении <span class="badge total-badget">4</span></a></li>
+						<li><a href="#">Выполнены <span class="badge total-badget">4</span></a></li>
+						<li><a href="#">Отменены <span class="badge total-badget">4</span></a></li>
+						<li><a href="#">Черновики <span class="badge total-badget">4</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+		</nav>
+		<nav class="navbar task-status-navbar">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+					<ul class="nav navbar-nav">
+						<li ng-repeat="inboxItem in $ctrl.inbox" ng-click="$ctrl.activateTab($event, inboxItem.stateId)" ng-class="{active: $route.current.activetab == 'active-item'}">
+							<a href="#!task-status/{{inboxItem.stateId}}">{{inboxItem.name}}
+							<span class="badge total-badget new">{{inboxItem.inbox}}</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+		</nav>
+	</div>
+  <script src="js/bundle.js"></script>
 </body>
 </html>

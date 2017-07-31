@@ -1,0 +1,19 @@
+/*Custom badget*/
+
+.total-badget {
+	background-color: transparent;
+    color: #666666;
+    border-color: #cccccc;
+    min-height: 20px;
+    text-align: justify;
+    padding: 4px 7px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 20px;
+    margin: 0 0 0 5px;
+}
+.total-badget.new {
+	background-color: #ff6633;
+    color: white;
+    border-style: hidden;
+}

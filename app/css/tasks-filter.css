@@ -1,0 +1,15 @@
+.tasks-filter {
+	margin: 20px 0 30px 0;
+}
+.tasks-filter label{
+	color: #cccccc;
+}
+.tasks-filter .dropdown button{
+	border: none;
+    background-color: transparent;
+    margin: 10px 0 10px 0;
+    padding: 0;
+}
+.tasks-filter .btn-default:active, .tasks-filter .btn-default.active, .tasks-filter .open > .dropdown-toggle.btn-default {
+	background-color: transparent;
+}

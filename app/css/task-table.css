@@ -1,0 +1,5 @@
+.task-table thead, .task-table thead th {
+	color: #cccccc;
+    font-size: 12px;
+    font-weight: normal;
+}
