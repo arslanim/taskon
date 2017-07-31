@@ -1,25 +1,25 @@
 <div class="row tasks-filter">
 	<div class="col-md-2">
-		<input type="text" class="form-control" placeholder="Поиск по слову">
+		<input ng-model="$ctrl.filter.nameFilter" type="text" class="form-control" placeholder="Поиск по слову">
 	</div>
 	<div class="col-md-2">
 		<div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Персональное
+		      <input ng-model="$ctrl.filter.personal" type="checkbox"> Персональное
 		    </label>
 		</div>
 	</div>
 	<div class="col-md-2">
 		<div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Ночное
+		      <input ng-model="$ctrl.filter.night" type="checkbox"> Ночное
 		    </label>
 		</div>
 	</div>
 	<div class="col-md-2">
 		<div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Срочное
+		      <input ng-model="$ctrl.filter.urgent" type="checkbox"> Срочное
 		    </label>
 		</div>
 	</div>
@@ -51,7 +51,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="task in $ctrl.taskList">
+		<tr ng-repeat="task in $ctrl.taskList | taskList:$ctrl.filter.nameFilter:$ctrl.filter.personal:$ctrl.filter.night:$ctrl.filter.urgent">
 			<td>{{task.id}}</td>
 			<td>{{task.city}}</td>
 			<td>{{task.name}}</td>

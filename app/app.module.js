@@ -15,9 +15,11 @@ require('./css/components.css');
 
 angular.module('app', [
 	'ngRoute',
-	'components.module'
+	'components.module',
+	'filters.module'
 ]);
 
 require('./configuration/app.config')(angular.module('app'));
 require('./components/components.module');
 require('./services/services.module');
+require('./filters/filters.module');

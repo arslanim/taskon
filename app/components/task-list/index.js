@@ -5,6 +5,13 @@ module.exports = function(componentsModule) {
 			controller: ['$routeParams', 'Task', 'AuthService', function TaskListController($routeParams, Task, AuthService) {
 				var controller = this;
 
+				//init default task filter
+				controller.filter = {
+					nameFilter: '',
+					personal: undefined,
+					night: undefined,
+					urgent: undefined
+				};
 				controller.stateId = $routeParams.statusId;
 				controller.currentUser = AuthService.currentUser();
 				//console.log(controller.statusId);
