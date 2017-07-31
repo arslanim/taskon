@@ -1,0 +1,62 @@
+<div class="row tasks-filter">
+	<div class="col-md-2">
+		<input type="text" class="form-control" placeholder="Поиск по слову">
+	</div>
+	<div class="col-md-2">
+		<div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Персональное
+		    </label>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Ночное
+		    </label>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Срочное
+		    </label>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="dropdown">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    Никита Ласточкин
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a href="#">Action</a></li>
+		    <li><a href="#">Another action</a></li>
+		    <li><a href="#">Something else here</a></li>
+		    <li role="separator" class="divider"></li>
+		    <li><a href="#">Separated link</a></li>
+		  </ul>
+		</div>
+	</div>
+	<div class="col-md-2"></div>
+</div>
+<table class="table task-table">
+	<thead>
+		<tr> 
+			<th>ID</th>
+			<th>Город</th>
+			<th>Название</th>
+			<th>Выполнить до</th>
+			<th>Сумма</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="task in $ctrl.taskList">
+			<td>{{task.id}}</td>
+			<td>{{task.city}}</td>
+			<td>{{task.name}}</td>
+			<td>{{task.pastDue}}</td>
+			<td>{{task.sum}}</td>
+		</tr>
+	</tbody>
+</table>
