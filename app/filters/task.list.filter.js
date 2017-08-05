@@ -13,13 +13,11 @@ module.exports = function(filtersModule) {
 					return (searchBool) ? (sourceBool == searchBool) : (true);
 				};
 
-			return function(input, nameFilter, personal, night, urgent) {
+			return function(input, taskListFilter) {
 				var output = [];
-				var letterMatch = new RegExp(nameFilter, 'i');
-				console.log(nameFilter);
 
 				angular.forEach(input, function(item) {
-					if (searchByString(item.name, nameFilter) && searchByBoolean(item.personal, personal) && searchByBoolean(item.night, night) && searchByBoolean(item.urgent, urgent)) {
+					if (searchByString(item.name, taskListFilter.name) && searchByBoolean(item.personal, taskListFilter.personal) && searchByBoolean(item.night, taskListFilter.night) && searchByBoolean(item.urgent, taskListFilter.urgent)) {
 						output.push(item);
 					}
 				});

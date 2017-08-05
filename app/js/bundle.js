@@ -10364,26 +10364,27 @@ module.exports = function(app) {
 angular.module('filters.module', []);
 
 __webpack_require__(17)(angular.module('filters.module'));
+__webpack_require__(18)(angular.module('filters.module'));
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(22);
+__webpack_require__(23);
 
 angular.module('services.module', [
 	'ngResource'
 ]);
 
-__webpack_require__(19)(angular.module('services.module'));
-__webpack_require__(18)(angular.module('services.module'));
 __webpack_require__(20)(angular.module('services.module'));
+__webpack_require__(19)(angular.module('services.module'));
+__webpack_require__(21)(angular.module('services.module'));
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(23);
+__webpack_require__(24);
 module.exports = 'ngRoute';
 
 
@@ -10391,7 +10392,7 @@ module.exports = 'ngRoute';
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(24);
+__webpack_require__(25);
 module.exports = angular;
 
 
@@ -12857,7 +12858,7 @@ __webpack_require__(3);
 module.exports = function(componentsModule) {
 	angular.module('components.module')
 		.component('statusTab', {
-			template: __webpack_require__(25),
+			template: __webpack_require__(26),
 			controller: ['AuthService', 'StateInbox', '$route', function(AuthService, StateInbox, $route) {
 				var controller = this;
 
@@ -12879,17 +12880,18 @@ module.exports = function(componentsModule) {
 module.exports = function(componentsModule) {
 	componentsModule
 		.component('taskList', {
-			template: __webpack_require__(26),
-			controller: ['$routeParams', 'Task', 'AuthService', function TaskListController($routeParams, Task, AuthService) {
+			template: __webpack_require__(27),
+			controller: ['$routeParams', 'Task', 'AuthService', 'TaskListFilterFactory', function TaskListController($routeParams, Task, AuthService, TaskListFilterFactory) {
 				var controller = this;
 
 				//init default task filter
-				controller.filter = {
+				controller.taskListFilter = new TaskListFilterFactory();
+				/*controller.filter = {
 					nameFilter: '',
 					personal: undefined,
 					night: undefined,
 					urgent: undefined
-				};
+				};*/
 				controller.stateId = $routeParams.statusId;
 				controller.currentUser = AuthService.currentUser();
 				//console.log(controller.statusId);
@@ -12902,6 +12904,24 @@ module.exports = function(componentsModule) {
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports) {
+
+module.exports = function(filtersModule) {
+	filtersModule
+		.factory('TaskListFilterFactory', function() {
+			var constructor = function(name, personal, night, urgent) {
+				this.name = name ? name : '';
+				this.personal = personal ? personal : undefined;
+				this.night = night ? night : undefined;
+				this.urgent = urgent ? urgent : undefined;
+			};
+
+			return constructor;
+		});
+}
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = function(filtersModule) {
@@ -12919,13 +12939,11 @@ module.exports = function(filtersModule) {
 					return (searchBool) ? (sourceBool == searchBool) : (true);
 				};
 
-			return function(input, nameFilter, personal, night, urgent) {
+			return function(input, taskListFilter) {
 				var output = [];
-				var letterMatch = new RegExp(nameFilter, 'i');
-				console.log(nameFilter);
 
 				angular.forEach(input, function(item) {
-					if (searchByString(item.name, nameFilter) && searchByBoolean(item.personal, personal) && searchByBoolean(item.night, night) && searchByBoolean(item.urgent, urgent)) {
+					if (searchByString(item.name, taskListFilter.name) && searchByBoolean(item.personal, taskListFilter.personal) && searchByBoolean(item.night, taskListFilter.night) && searchByBoolean(item.urgent, taskListFilter.urgent)) {
 						output.push(item);
 					}
 				});
@@ -12936,7 +12954,7 @@ module.exports = function(filtersModule) {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = function(serviceModule) {
@@ -12952,7 +12970,7 @@ module.exports = function(serviceModule) {
 };
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = function(servicesModule) {
@@ -12972,7 +12990,7 @@ module.exports = function(servicesModule) {
 	
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = function(servicesModule) {
@@ -12992,7 +13010,7 @@ module.exports = function(servicesModule) {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 /**
@@ -13856,15 +13874,15 @@ angular.module('ngResource', ['ng']).
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(21);
+__webpack_require__(22);
 module.exports = 'ngResource';
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 /**
@@ -14941,7 +14959,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 /**
@@ -48777,16 +48795,16 @@ $provide.value("$locale", {
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = "<nav class=\"navbar task-status-navbar\">\r\n\t<div class=\"container-fluid\">\r\n\t\t<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-9\">\r\n\t\t\t<ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li ng-repeat=\"inboxItem in $ctrl.inbox\" ng-click=\"$ctrl.activateTab($event, inboxItem.stateId)\" ng-class=\"{active: $route.current.activetab == 'active-item'}\">\r\n\t\t\t\t\t<a href=\"#!task-status/{{inboxItem.stateId}}\">{{inboxItem.name}}\r\n\t\t\t\t\t<span class=\"badge total-badget new\">{{inboxItem.inbox}}</span>\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n\t<hr>\r\n</nav>"
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row tasks-filter\">\r\n\t<div class=\"col-md-2\">\r\n\t\t<input ng-model=\"$ctrl.filter.nameFilter\" type=\"text\" class=\"form-control\" placeholder=\"Поиск по слову\">\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"checkbox\">\r\n\t\t    <label>\r\n\t\t      <input ng-model=\"$ctrl.filter.personal\" type=\"checkbox\"> Персональное\r\n\t\t    </label>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"checkbox\">\r\n\t\t    <label>\r\n\t\t      <input ng-model=\"$ctrl.filter.night\" type=\"checkbox\"> Ночное\r\n\t\t    </label>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"checkbox\">\r\n\t\t    <label>\r\n\t\t      <input ng-model=\"$ctrl.filter.urgent\" type=\"checkbox\"> Срочное\r\n\t\t    </label>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"dropdown\">\r\n\t\t  <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n\t\t    Никита Ласточкин\r\n\t\t    <span class=\"caret\"></span>\r\n\t\t  </button>\r\n\t\t  <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n\t\t    <li><a href=\"#\">Action</a></li>\r\n\t\t    <li><a href=\"#\">Another action</a></li>\r\n\t\t    <li><a href=\"#\">Something else here</a></li>\r\n\t\t    <li role=\"separator\" class=\"divider\"></li>\r\n\t\t    <li><a href=\"#\">Separated link</a></li>\r\n\t\t  </ul>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\"></div>\r\n</div>\r\n<table class=\"table task-table\">\r\n\t<thead>\r\n\t\t<tr> \r\n\t\t\t<th>ID</th>\r\n\t\t\t<th>Город</th>\r\n\t\t\t<th>Название</th>\r\n\t\t\t<th>Выполнить до</th>\r\n\t\t\t<th>Сумма</th>\r\n\t\t</tr>\r\n\t</thead>\r\n\t<tbody>\r\n\t\t<tr ng-repeat=\"task in $ctrl.taskList | taskList:$ctrl.filter.nameFilter:$ctrl.filter.personal:$ctrl.filter.night:$ctrl.filter.urgent\">\r\n\t\t\t<td>{{task.id}}</td>\r\n\t\t\t<td>{{task.city}}</td>\r\n\t\t\t<td>{{task.name}}</td>\r\n\t\t\t<td>{{task.pastDue}}</td>\r\n\t\t\t<td>{{task.sum}}</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+module.exports = "<div class=\"row tasks-filter\">\r\n\t<div class=\"col-md-2\">\r\n\t\t<input ng-model=\"$ctrl.taskListFilter.name\" type=\"text\" class=\"form-control\" placeholder=\"Поиск по слову\">\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"checkbox\">\r\n\t\t    <label>\r\n\t\t      <input ng-model=\"$ctrl.taskListFilter.personal\" type=\"checkbox\"> Персональное\r\n\t\t    </label>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"checkbox\">\r\n\t\t    <label>\r\n\t\t      <input ng-model=\"$ctrl.taskListFilter.night\" type=\"checkbox\"> Ночное\r\n\t\t    </label>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"checkbox\">\r\n\t\t    <label>\r\n\t\t      <input ng-model=\"$ctrl.taskListFilter.urgent\" type=\"checkbox\"> Срочное\r\n\t\t    </label>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\">\r\n\t\t<div class=\"dropdown\">\r\n\t\t  <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n\t\t    Никита Ласточкин\r\n\t\t    <span class=\"caret\"></span>\r\n\t\t  </button>\r\n\t\t  <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r\n\t\t    <li><a href=\"#\">Action</a></li>\r\n\t\t    <li><a href=\"#\">Another action</a></li>\r\n\t\t    <li><a href=\"#\">Something else here</a></li>\r\n\t\t    <li role=\"separator\" class=\"divider\"></li>\r\n\t\t    <li><a href=\"#\">Separated link</a></li>\r\n\t\t  </ul>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-md-2\"></div>\r\n</div>\r\n<table class=\"table task-table\">\r\n\t<thead>\r\n\t\t<tr> \r\n\t\t\t<th>ID</th>\r\n\t\t\t<th>Город</th>\r\n\t\t\t<th>Название</th>\r\n\t\t\t<th>Выполнить до</th>\r\n\t\t\t<th>Сумма</th>\r\n\t\t</tr>\r\n\t</thead>\r\n\t<tbody>\r\n\t\t<tr ng-repeat=\"task in $ctrl.taskList | taskList:$ctrl.taskListFilter\">\r\n\t\t\t<td>{{task.id}}</td>\r\n\t\t\t<td>{{task.city}}</td>\r\n\t\t\t<td>{{task.name}}</td>\r\n\t\t\t<td>{{task.pastDue}}</td>\r\n\t\t\t<td>{{task.sum}}</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
 
 /***/ })
 /******/ ]);
