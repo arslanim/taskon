@@ -10349,7 +10349,7 @@ module.exports = function(app) {
 			$routeProvider
 				.when("/task-status/:statusId", {
 					template: "<task-list></task-list>",
-					activeTab: 'active-item'
+					activetab: '@statusId'
 				})
 				.otherwise({
 					template: "<task-list></task-list>"
@@ -12859,16 +12859,15 @@ module.exports = function(componentsModule) {
 	angular.module('components.module')
 		.component('statusTab', {
 			template: __webpack_require__(26),
-			controller: ['AuthService', 'StateInbox', '$route', function(AuthService, StateInbox, $route) {
+			controller: ['AuthService', 'StateInbox', '$route', '$location', function(AuthService, StateInbox, $route, $location) {
 				var controller = this;
 
+				controller.isActive = function(currentRoute) {
+					return currentRoute === $location.path();
+				};
 				controller.currentUser = AuthService.currentUser();
 				controller.$route = $route;
 				controller.inbox = StateInbox.getUserStateInbox({userId: controller.currentUser.id});
-
-				controller.activateTab = function($event, inboxId) {
-					console.log($event.currentTarget);
-				};
 			}]
 		});
 };
@@ -48798,7 +48797,7 @@ $provide.value("$locale", {
 /* 26 */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar task-status-navbar\">\r\n\t<div class=\"container-fluid\">\r\n\t\t<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-9\">\r\n\t\t\t<ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li ng-repeat=\"inboxItem in $ctrl.inbox\" ng-click=\"$ctrl.activateTab($event, inboxItem.stateId)\" ng-class=\"{active: $route.current.activetab == 'active-item'}\">\r\n\t\t\t\t\t<a href=\"#!task-status/{{inboxItem.stateId}}\">{{inboxItem.name}}\r\n\t\t\t\t\t<span class=\"badge total-badget new\">{{inboxItem.inbox}}</span>\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n\t<hr>\r\n</nav>"
+module.exports = "<nav class=\"navbar task-status-navbar\">\r\n\t<div class=\"container-fluid\">\r\n\t\t<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-9\">\r\n\t\t\t<ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li ng-repeat=\"inboxItem in $ctrl.inbox\" ng-click=\"$ctrl.activateTab($event, inboxItem.stateId)\" ng-class=\"{'active-item': $ctrl.isActive('/task-status/' + inboxItem.stateId)}\">\r\n\t\t\t\t\t<a href=\"#!task-status/{{inboxItem.stateId}}\">{{inboxItem.name}}\r\n\t\t\t\t\t<span class=\"badge total-badget new\">{{inboxItem.inbox}}</span>\r\n\t\t\t\t\t</a>\r\n\t\t\t\t</li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n\t<hr>\r\n</nav>"
 
 /***/ }),
 /* 27 */

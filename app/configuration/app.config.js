@@ -5,7 +5,7 @@ module.exports = function(app) {
 			$routeProvider
 				.when("/task-status/:statusId", {
 					template: "<task-list></task-list>",
-					activeTab: 'active-item'
+					activetab: '@statusId'
 				})
 				.otherwise({
 					template: "<task-list></task-list>"
